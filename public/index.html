@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Curso</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <aside class="sidebar">
+        <button id="newClassBtn" class="primary-btn" type="button">+ Nueva clase</button>
+        <ul id="classList" class="class-list"></ul>
+      </aside>
+
+      <section class="editor">
+        <h1>Gestión de clases</h1>
+        <form id="classForm">
+          <div class="row">
+            <label for="fecha">Fecha</label>
+            <input id="fecha" name="fecha" type="date" required />
+          </div>
+
+          <div class="row">
+            <label for="nombre">Nombre de la clase</label>
+            <input id="nombre" name="nombre" type="text" placeholder="Ej: Introducción" required />
+          </div>
+
+          <div class="row">
+            <label for="contenido">Contenido</label>
+            <textarea
+              id="contenido"
+              name="contenido"
+              rows="16"
+              placeholder="Escribe aquí el contenido de la clase..."
+              required
+            ></textarea>
+          </div>
+
+          <button class="primary-btn" type="submit">Guardar</button>
+          <p id="message" class="message"></p>
+        </form>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>

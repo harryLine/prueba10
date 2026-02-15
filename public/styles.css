@@ -1,0 +1,140 @@
+:root {
+  color-scheme: light;
+  font-family: Inter, Segoe UI, Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f4f5f7;
+  color: #111827;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  height: 100vh;
+}
+
+.sidebar {
+  background: #202123;
+  color: #fff;
+  padding: 16px;
+  border-right: 1px solid #303236;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.primary-btn {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background: #1d4ed8;
+}
+
+.class-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.class-item {
+  background: #2b2d31;
+  border: 1px solid #3b3d43;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.class-item.active {
+  border-color: #60a5fa;
+}
+
+.class-item-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.class-item-date {
+  opacity: 0.8;
+  font-size: 12px;
+}
+
+.editor {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+#classForm {
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 280px;
+}
+
+.message {
+  min-height: 18px;
+  margin: 0;
+  color: #1f2937;
+}
+
+.message.success {
+  color: #166534;
+}
+
+.message.error {
+  color: #b91c1c;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .sidebar {
+    min-height: 220px;
+  }
+}
