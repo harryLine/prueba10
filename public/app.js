@@ -20,6 +20,40 @@ function setMessage(text, type = '') {
   messageElement.className = `message ${type}`.trim();
 }
 
+async function readApiResponse(response) {
+  const rawBody = await response.text();
+  const contentType = response.headers.get('content-type') || '';
+
+  let parsed;
+  if (rawBody && contentType.includes('application/json')) {
+    try {
+      parsed = JSON.parse(rawBody);
+    } catch {
+      parsed = null;
+    }
+  }
+
+  if (response.ok) {
+    if (parsed === null || parsed === undefined) {
+      throw new Error('Respuesta inválida del servidor.');
+    }
+
+    return parsed;
+  }
+
+  if (parsed && parsed.error) {
+    throw new Error(parsed.error);
+  }
+
+  if (rawBody.trim().startsWith('<!doctype') || rawBody.trim().startsWith('<html')) {
+    throw new Error(
+      'El servidor devolvió HTML en lugar de JSON. Revisa que Node.js esté activo y que la app esté iniciada en Plesk.'
+    );
+  }
+
+  throw new Error('No se pudo completar la petición al servidor.');
+}
+
 function resetForm() {
   selectedClassId = null;
   classForm.reset();
@@ -61,11 +95,8 @@ function renderClassList() {
 
 async function loadClasses() {
   const response = await fetch('/api/clases');
-  if (!response.ok) {
-    throw new Error('No se pudieron cargar las clases.');
-  }
-
-  classes = await response.json();
+  const data = await readApiResponse(response);
+  classes = data;
   renderClassList();
 }
 
@@ -90,11 +121,7 @@ async function saveClass(event) {
       body: JSON.stringify(payload),
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || 'No se pudo guardar la clase.');
-    }
+    const data = await readApiResponse(response);
 
     setMessage(`Clase "${data.nombre}" guardada correctamente.`, 'success');
     await loadClasses();

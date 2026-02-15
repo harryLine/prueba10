@@ -102,6 +102,19 @@ Debe responder:
 {"status":"ok"}
 ```
 
+
+## Solución de problemas
+
+Si al guardar aparece el error `Unexpected token '<', "<!doctype ..." is not valid JSON`, significa que la petición a `/api/clases` está devolviendo HTML (normalmente una página de error o fallback de hosting) en lugar de JSON.
+
+En Plesk revisa:
+
+1. Que **Node.js esté activado** en el dominio.
+2. Que **Application Startup File** sea `src/server.js`.
+3. Que hayas ejecutado **NPM Install** y luego **Restart App**.
+4. Que `.env` tenga credenciales válidas de MariaDB.
+5. Que `/health` responda `{"status":"ok"}` y `/api/clases` responda JSON.
+
 ## API incluida
 
 - `GET /api/clases` → listado ordenado por fecha descendente.

@@ -74,6 +74,19 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
+app.use('/api', (_req, res) => {
+  res.status(404).json({ error: 'Endpoint API no encontrado.' });
+});
+
+app.use((error, _req, res, _next) => {
+  if (error instanceof SyntaxError && error.status === 400 && 'body' in error) {
+    return res.status(400).json({ error: 'JSON inválido en la solicitud.' });
+  }
+
+  console.error('Error inesperado:', error);
+  return res.status(500).json({ error: 'Error interno del servidor.' });
+});
+
 async function bootstrap() {
   try {
     await initDatabase();
