@@ -1,0 +1,23 @@
+{
+  "name": "gestion-curso-plesk",
+  "version": "1.0.0",
+  "description": "App web sencilla para gestionar clases de un curso con Node.js y MariaDB",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "mariadb",
+    "plesk",
+    "curso"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0"
+  }
+}
